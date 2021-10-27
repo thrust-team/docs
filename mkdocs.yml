@@ -1,6 +1,8 @@
 site_name: THRUST Technical Docs
 theme:
   name: material
+  features:
+    - navigation.tabs
 
 markdown_extensions:
   - pymdownx.arithmatex:
