@@ -8,10 +8,9 @@ In order to download publicly distributed files through the P2P technology like 
 ## Requirements
 
 1. An installed bittorrent client like:
-    - [qBitTorrent](https://www.qbittorrent.org/download.php), `choco install qbittorrent -y`
-    - [Deluge](https://deluge-torrent.org/), `choco install deluge -y`
-    or a webbased client like:
-    - [βTorrent](https://btorrent.xyz/)
+    - [qBitTorrent](https://www.qbittorrent.org/download.php), `choco install qbittorrent -y`, installed client
+    - [Deluge](https://deluge-torrent.org/), `choco install deluge -y`, installed client
+    - [βTorrent](https://btorrent.xyz/), web based client
 2. A `magnet:` link to download
 
 ## Downloading
