@@ -3,7 +3,10 @@ theme:
   name: material
   features:
     - navigation.tabs
-
+  palette:
+    primary: black
+  icon:
+    logo: material/rocket-launch
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
