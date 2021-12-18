@@ -95,14 +95,19 @@ $$
 
 #### Mass extraction
 The mass that gets extracted at every computation step from the tank is computed as
+
 $$
 dm_i = \dot{m}_i \cdot dt
 $$
+
 and the remaining mass inside the tank is thus:
+
 $$
 m_{i+1} = m_i - dm_i
 $$
+
 Whether the extraction is done of liquid oxidizer or vapor oxidizer, the entropy $S$ of the mass left in the tank is computed as:
+
 $$
 \begin{cases}
 S_{i+1} = S_i - dm_i \cdot s_l(T_i),& \quad \text{liquid extraction}\\
@@ -111,6 +116,7 @@ S_{i+1} = S_i - dm_i \cdot s_v(T_i),& \quad \text{vapor extraction}
 $$
 
 And thus the specific entropy $s$ and specific volume $v$ are
+
 $$
 \begin{align}
 s_{i+1} = \frac{S_{i+1}}{m_{i+1}} \\
@@ -172,6 +178,7 @@ $$
 $$
 
 The problem is now finding the quantities inside the Jacobian matrix. The partial derivatives with respect to vapor quality $x$ are immediate:
+
 $$
 \begin{align}
 \frac{\partial v}{\partial x} = v_v(T) - v_l(T) \\
@@ -180,6 +187,7 @@ $$
 $$
 
 but the derivatives with respect to temperature $T$ must be computed numerically, in this case with central finite difference:
+
 $$
 \begin{align}
 \frac{\partial v}{\partial T}
@@ -196,6 +204,7 @@ r = \sqrt{\frac{dT_j}{T_j}^2+\frac{dx_j}{x_j}^2}\leq \text{tol}
 $$
 
 The guesses for temperature $T_j$ and vapor quality $x_j$ are updated as:
+
 $$
 \begin{align}
 T_{j+1} = T_j + dT_j \\
@@ -209,12 +218,12 @@ $$
 $$
 \begin{align}
 T_{i+1} - T_{i} = \sum_{\substack{T_j=T_i\\x_j = x_i}}^{r<tol} dT_j(x_j,T_j) \\
-x_{i+1} - x_{i} = \sum_{\substack{T_j=T_i\\x_j = x_i}}^{r<tol} dx_j(x_j,T_j) \\
-
+x_{i+1} - x_{i} = \sum_{\substack{T_j=T_i\\x_j = x_i}}^{r<tol} dx_j(x_j,T_j)
 \end{align}
 $$
 
 where, using the formula for the inverse of a $2 \times 2$ matrix:
+
 $$
 \begin{Bmatrix}
     dx_j \\
@@ -233,6 +242,7 @@ $$
     ds_j
 \end{Bmatrix}
 $$
+
 with all partial derivatives as a function of the guess vapor quality and temperature $f(x_j,T_j)$
 and
 
@@ -249,6 +259,7 @@ $$
 $$
 
 Once the quantities for $T_{i+1}$ and $x_{i+1}$ are estimated, the new value for pressure $p_i$ and mass flow $\dot{m}_i$ are:
+
 $$
 \begin{align}
 p_{i+1} = p_{Sat}(T_{i+1}) \\
