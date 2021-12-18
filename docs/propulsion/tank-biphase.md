@@ -258,6 +258,7 @@ $$
 \end{Bmatrix}
 $$
 
+#### Ready for next step
 Once the quantities for $T_{i+1}$ and $x_{i+1}$ are estimated, the new value for pressure $p_i$ and mass flow $\dot{m}_i$ are:
 
 $$
@@ -269,5 +270,6 @@ $$
 
 The last equation assumes that the mass flow ratio and pressure is constant along the entire extraction.
 
+### Conclusion
 The extraction is over once the vapor quality $x$ reaches the value of $1$, which is when the tank contains only vapor and the system is not biphasic anymore.
 
