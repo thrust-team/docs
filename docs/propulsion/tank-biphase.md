@@ -2,7 +2,9 @@
 title: Biphase Model for Saturated Tank
 author: Alberto Scompairn
 ---
+
 # Biphase Model for Saturated Tank
+
 The tank holds a self pressurized oxidizer, which is in saturation condition between liquid and vapor.
 
 ## Oxidizer Extraction Model
@@ -10,6 +12,7 @@ The tank holds a self pressurized oxidizer, which is in saturation condition bet
 Suppose a tank is filled up to a certain point with liquid oxidizer and its vapor is saturated at a certain ambient temperature.
 
 ### Parameters
+
 The parameters of the tank before the extraction are:
 
 - $V_T$ Internal volume of the tank
@@ -29,6 +32,7 @@ The following solver needs as initial conditions only:
 and the following data for the chosen oxidizer.
 
 ### Oxidizer Data
+
 Data for known properties of the oxidizer as a function of temperature are needed:
 
 - $p_{Sat}(T)$ Saturation pressure for a given temperature
@@ -38,7 +42,9 @@ Data for known properties of the oxidizer as a function of temperature are neede
 - $s_v(T)$ Specific entropy of the saturated vapor for a given temperature
 
 ### Numerical solution
+
 #### Time constraints
+
 The extraction time $t_n$ can be considered adimensional
 
 $$ t_n = 1$$
@@ -52,6 +58,7 @@ where $\Delta t$ is a reasonably low number (ex. $\Delta t = 5\cdot10^{-4}$).
 Although the initial conditions are useful, some of them can be discarded by considering the problem adimensionalized with respect to the mass of oxidizer stored inside the tank.
 
 #### Initial conditions
+
 $$ m_0 = 1 $$
 
 Therefore the liquid mass is
@@ -66,23 +73,22 @@ $$ V_0 = V_{l,0} \cdot (1+f) $$
 and the vapor volume
 $$ V_{v,0} = V_0 - V_{l,0} $$
 
-
 The physical quantities are regulated by the following expressions:
 
 $$
-\begin{align}
+\begin{aligned}
 v_l(T) &= \frac1{\rho_l(T)} \\
 v_v(T) &= \frac1{\rho_l(T)} \\
 x(v, T) &= \frac{v - v_l(T)}{v_v(T) - v_l(T)} \\
 s(x, T) &= (1 - x) \cdot s_l(T) + x \cdot s_v(T) \\
 v(x, T) &= (1 - x) \cdot v_l(T) + x \cdot v_v(T) \\
-\end{align}
+\end{aligned}
 $$
 
 and the following are the initial conditions of the loop
 
 $$
-\begin{align}
+\begin{aligned}
 T_0 &\\
 p_0 &= p_{Sat}(T_0)\\
 v_0 &= \frac{V_0}{m_0} \\
@@ -90,10 +96,11 @@ x_0 &= x(v_0,T_0) \\
 s_0 &= s(x_0, T_0) \\
 S_0 &= m_0 \cdot s_0 \\
 \dot{m}_0 &= \frac{m_0}{t_n}
-\end{align}
+\end{aligned}
 $$
 
 #### Mass extraction
+
 The mass that gets extracted at every computation step from the tank is computed as
 
 $$
@@ -118,23 +125,23 @@ $$
 And thus the specific entropy $s$ and specific volume $v$ are
 
 $$
-\begin{align}
+\begin{aligned}
 s_{i+1} = \frac{S_{i+1}}{m_{i+1}} \\
 v_{i+1} = \frac{V_0}{m_{i+1}}
-\end{align}
+\end{aligned}
 $$
 
-
 #### Vapor quality and temperature evaluation
+
 The next goal is to compute the variation of vapor quality $x$ and temperature $T$ given the variation in specific volume $v$ and specific enthalpy $s$ after th extraction.
 
 The functions $s(x,T)$ and $v(x,T)$ expressed previously can be differentiated with respect to $x$ and $T$ as:
 
 $$
-\begin{align}
+\begin{aligned}
 dv = \frac{\partial v}{\partial x}\, dx + \frac{\partial v}{\partial T}\,dT \\
 ds = \frac{\partial s}{\partial x}\, dx + \frac{\partial s}{\partial T}\,dT
-\end{align}
+\end{aligned}
 $$
 
 which in matrix form becomes
@@ -144,12 +151,12 @@ $$
     dv \\
     ds
 \end{Bmatrix}
-= 
+=
 \begin{bmatrix}
-    \frac{\partial v}{\partial x} &
-    \frac{\partial v}{\partial T}\\
-    \frac{\partial s}{\partial x}&
-    \frac{\partial s}{\partial T}
+    \dfrac{\partial v}{\partial x} &
+    \dfrac{\partial v}{\partial T}\\
+    \dfrac{\partial s}{\partial x}&
+    \dfrac{\partial s}{\partial T}
 \end{bmatrix}
 \begin{Bmatrix}
     dx \\
@@ -164,12 +171,12 @@ $$
     dx \\
     dT
 \end{Bmatrix}
-= 
+=
 \begin{bmatrix}
-    \frac{\partial v}{\partial x} &
-    \frac{\partial v}{\partial T}\\
-    \frac{\partial s}{\partial x}&
-    \frac{\partial s}{\partial T}
+    \dfrac{\partial v}{\partial x} &
+    \dfrac{\partial v}{\partial T}\\
+    \dfrac{\partial s}{\partial x}&
+    \dfrac{\partial s}{\partial T}
 \end{bmatrix}^{-1}
 \begin{Bmatrix}
     dv \\
@@ -180,21 +187,21 @@ $$
 The problem is now finding the quantities inside the Jacobian matrix. The partial derivatives with respect to vapor quality $x$ are immediate:
 
 $$
-\begin{align}
+\begin{aligned}
 \frac{\partial v}{\partial x} = v_v(T) - v_l(T) \\
 \frac{\partial s}{\partial x} = s_v(T) - s_l(T)
-\end{align}
+\end{aligned}
 $$
 
 but the derivatives with respect to temperature $T$ must be computed numerically, in this case with central finite difference:
 
 $$
-\begin{align}
+\begin{aligned}
 \frac{\partial v}{\partial T}
 &= \frac12\varepsilon [v(x,T+\varepsilon)-v(x,T-\varepsilon)] \\
 \frac{\partial s}{\partial T}
 &= \frac12\varepsilon [s(x,T+\varepsilon)-s(x,T-\varepsilon)]
-\end{align}
+\end{aligned}
 $$
 
 Starting the evaluation from the current temperature $T_i$, the target temperature $T_{i+1}$ will be reached with successive approssimation of a progressively changing temperature $T_j$ until the residue $r$ is under the desired tolerance:
@@ -206,20 +213,20 @@ $$
 The guesses for temperature $T_j$ and vapor quality $x_j$ are updated as:
 
 $$
-\begin{align}
+\begin{aligned}
 T_{j+1} = T_j + dT_j \\
 x_{j+1} = x_j + dx_j
-\end{align}
+\end{aligned}
 $$
  until the final temperature $T_{i+1}$ is the $n$-th guess temperature $T_j\mid_{j=n}$.
 
  In summary:
 
 $$
-\begin{align}
+\begin{aligned}
 T_{i+1} - T_{i} = \sum_{\substack{T_j=T_i\\x_j = x_i}}^{r<tol} dT_j(x_j,T_j) \\
 x_{i+1} - x_{i} = \sum_{\substack{T_j=T_i\\x_j = x_i}}^{r<tol} dx_j(x_j,T_j)
-\end{align}
+\end{aligned}
 $$
 
 where, using the formula for the inverse of a $2 \times 2$ matrix:
@@ -259,17 +266,18 @@ $$
 $$
 
 #### Ready for next step
+
 Once the quantities for $T_{i+1}$ and $x_{i+1}$ are estimated, the new value for pressure $p_i$ and mass flow $\dot{m}_i$ are:
 
 $$
-\begin{align}
+\begin{aligned}
 p_{i+1} = p_{Sat}(T_{i+1}) \\
 \dot{m}_{i+1} = \frac{\dot{m}_0}{p_0} \cdot p_{i+1}
-\end{align}
+\end{aligned}
 $$
 
 The last equation assumes that the mass flow ratio and pressure is constant along the entire extraction.
 
 ### Conclusion
-The extraction is over once the vapor quality $x$ reaches the value of $1$, which is when the tank contains only vapor and the system is not biphasic anymore.
 
+The extraction is over once the vapor quality $x$ reaches the value of $1$, which is when the tank contains only vapor and the system is not biphasic anymore.
