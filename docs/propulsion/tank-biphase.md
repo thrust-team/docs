@@ -150,8 +150,7 @@ $$
 \begin{Bmatrix}
     dv \\
     ds
-\end{Bmatrix}
-=
+\end{Bmatrix} =
 \begin{bmatrix}
     \dfrac{\partial v}{\partial x} &
     \dfrac{\partial v}{\partial T}\\
@@ -170,8 +169,7 @@ $$
 \begin{Bmatrix}
     dx \\
     dT
-\end{Bmatrix}
-=
+\end{Bmatrix} =
 \begin{bmatrix}
     \dfrac{\partial v}{\partial x} &
     \dfrac{\partial v}{\partial T}\\
@@ -235,8 +233,7 @@ $$
 \begin{Bmatrix}
     dx_j \\
     dT_j
-\end{Bmatrix}
-=
+\end{Bmatrix} =
 \frac{1}{\frac{\partial v}{\partial x}\frac{\partial s}{\partial T} - \frac{\partial s}{\partial x}\frac{\partial v}{\partial T}}
 \begin{bmatrix}
     \frac{\partial s}{\partial x} &
@@ -257,8 +254,7 @@ $$
 \begin{Bmatrix}
     dv_j \\
     ds_j
-\end{Bmatrix}
-=
+\end{Bmatrix} =
 \begin{Bmatrix}
     v_{i+1} - v(x_j,T_j) \\
     s_{i+1} - v(x_j,T_j)
