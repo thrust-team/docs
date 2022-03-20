@@ -216,14 +216,14 @@ T_{j+1} = T_j + dT_j \\
 x_{j+1} = x_j + dx_j
 \end{aligned}
 $$
- until the final temperature $T_{i+1}$ is the $n$-th guess temperature $T_j\mid_{j=n}$.
+until the final temperature $T_{i+1}$ is the $n$-th guess temperature $T_j\mid_{j=n}$.
 
- In summary:
+In summary:
 
 $$
 \begin{aligned}
-T_{i+1} - T_{i} = \sum_{\substack{T_j=T_i\\x_j = x_i}}^{r<tol} dT_j(x_j,T_j) \\
-x_{i+1} - x_{i} = \sum_{\substack{T_j=T_i\\x_j = x_i}}^{r<tol} dx_j(x_j,T_j)
+T_{i+1} - T_{i} = \sum_{\substack{T_j=T_i \\ x_j = x_i}}^{r<tol} dT_j(x_j,T_j) \\
+x_{i+1} - x_{i} = \sum_{\substack{T_j=T_i \\ x_j = x_i}}^{r<tol} dx_j(x_j,T_j)
 \end{aligned}
 $$
 
