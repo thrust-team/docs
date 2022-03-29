@@ -257,7 +257,7 @@ $$
 \end{Bmatrix} =
 \begin{Bmatrix}
     v_{i+1} - v(x_j,T_j) \\
-    s_{i+1} - v(x_j,T_j)
+    s_{i+1} - s(x_j,T_j)
 \end{Bmatrix}
 $$
 
