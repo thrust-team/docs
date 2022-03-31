@@ -54,6 +54,7 @@ x(v, T) &= \frac{v - v_l(T)}{v_v(T) - v_l(T)} \\
 $$
 
 The mapping of $(x,T) \to (s,v)$ is given by:
+
 $$
 \begin{aligned}
     s(x, T) &= (1 - x) \cdot s_l(T) + x \cdot s_v(T) \\
@@ -80,8 +81,7 @@ which in matrix form becomes
 
 $$
 \begin{Bmatrix}
-    dv \\
-    ds
+    dv \\ ds
 \end{Bmatrix} =
 \begin{bmatrix}
     \dfrac{\partial v}{\partial x} &
@@ -90,8 +90,7 @@ $$
     \dfrac{\partial s}{\partial T}
 \end{bmatrix}
 \begin{Bmatrix}
-    dx \\
-    dT
+    dx \\ dT
 \end{Bmatrix}
 $$
 
@@ -99,8 +98,7 @@ and inverting algebraically
 
 $$
 \begin{Bmatrix}
-    dx \\
-    dT
+    dx \\ dT
 \end{Bmatrix} =
 \begin{bmatrix}
     \dfrac{\partial v}{\partial x} &
@@ -109,12 +107,12 @@ $$
     \dfrac{\partial s}{\partial T}
 \end{bmatrix}^{-1}
 \begin{Bmatrix}
-    dv \\
-    ds
+    dv \\ ds
 \end{Bmatrix}
 $$
 
 The quantities sought after are then computed as:
+
 $$
 \begin{Bmatrix}
     x(s,v) \\
@@ -205,8 +203,8 @@ And thus the specific entropy $s$ and specific volume $v$ are
 
 $$
 \begin{aligned}
-s_{i+1} = \frac{S_{i+1}}{m_{i+1}} \\
-v_{i+1} = \frac{V_0}{m_{i+1}}
+s_{i+1} &= \frac{S_{i+1}}{m_{i+1}} \\
+v_{i+1} &= \frac{V_0}{m_{i+1}}
 \end{aligned}
 $$
 
@@ -218,8 +216,8 @@ The problem is now finding the quantities inside the Jacobian matrix. The partia
 
 $$
 \begin{aligned}
-\frac{\partial v}{\partial x} = v_v(T) - v_l(T) \\
-\frac{\partial s}{\partial x} = s_v(T) - s_l(T)
+\frac{\partial v}{\partial x} &= v_v(T) - v_l(T) \\
+\frac{\partial s}{\partial x} &= s_v(T) - s_l(T)
 \end{aligned}
 $$
 
