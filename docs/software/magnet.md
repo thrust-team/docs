@@ -1,8 +1,7 @@
----
-title: Magnet
----
+# Magnet
 
-# How to download a file from a `magnet:` link
+This document explains how to download a file from a `magnet:` link.
+
 In order to download publicly distributed files through the P2P technology like Debian Server ISO, the most direct way is to use a `magnet:` link.
 
 ## Requirements
