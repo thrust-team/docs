@@ -1,9 +1,6 @@
----
-title: Biphase Model for Saturated Tank
-author: Alberto Scompairn
----
-
 # Biphase Model for Saturated Tank
+
+{{ git_page_authors }}
 
 The tank holds a self pressurized oxidizer, which is in saturation condition between liquid and vapor.
 
@@ -63,9 +60,11 @@ $$
 $$
 
 The goal is to find the inverse map
+
 $$
     (s,v) \to (x,T)
 $$
+
 since evaluating $s$ and $v$ for the mass extraction is trivial.
 
 The functions $s(x,T)$ and $v(x,T)$ can be differentiated with respect to $x$ and $T$ as:
@@ -151,15 +150,23 @@ Although the initial conditions are useful, some of them can be discarded by con
 $$ m_0 = 1 $$
 
 Therefore the liquid mass is
+
 $$ m_{l,0} = \frac{m_0}{1 + f \cdot \frac{\rho_{v,0}}{\rho_{l,0}}} $$
+
 And vapor mass is
+
 $$ m_{v,0} = m_0 - m_{l,0}$$
 
 The oxidizer liquid volume is simply
+
 $$ V_{l,0} = \frac{m_{l,0}}{\rho_{l,0}} $$
+
 which can be used to get the total volume
+
 $$ V_0 = V_{l,0} \cdot (1+f) $$
+
 and the vapor volume
+
 $$ V_{v,0} = V_0 - V_{l,0}.$$
 
 The following are the initial conditions of the loop
@@ -246,6 +253,7 @@ T_{j+1} = T_j + dT_j \\
 x_{j+1} = x_j + dx_j
 \end{aligned}
 $$
+
 until the final temperature $T_{i+1}$ is the $n$-th guess temperature $T_j\mid_{j=n}$.
 
 In summary:
@@ -287,7 +295,7 @@ $$
 \end{Bmatrix} =
 \begin{Bmatrix}
     v_{i+1} - v(x_j,T_j) \\
-    s_{i+1} - s(x_j,T_j)
+    s_{i+1} - s(x_j,T_j) \\
 \end{Bmatrix}
 $$
 
@@ -297,8 +305,8 @@ Once the quantities for $T_{i+1}$ and $x_{i+1}$ are estimated, the new value for
 
 $$
 \begin{aligned}
-p_{i+1} = p_{Sat}(T_{i+1}) \\
-\dot{m}_{i+1} = \frac{\dot{m}_0}{p_0} \cdot p_{i+1}
+    p_{i+1} &= p_{Sat} (T_{i+1}) \\
+    \dot{m}_{i+1} &= \frac{\dot{m}_0}{p_0} \cdot p_{i+1} \\
 \end{aligned}
 $$
 
