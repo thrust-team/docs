@@ -196,9 +196,9 @@ but the derivatives with respect to temperature $T$ must be computed numerically
 $$
 \begin{aligned}
 \frac{\partial v}{\partial T}
-&= \frac12\varepsilon [v(x,T+\varepsilon)-v(x,T-\varepsilon)] \\
+&= \frac1{2\varepsilon} [v(x,T+\varepsilon)-v(x,T-\varepsilon)] \\
 \frac{\partial s}{\partial T}
-&= \frac12\varepsilon [s(x,T+\varepsilon)-s(x,T-\varepsilon)]
+&= \frac1{2\varepsilon} [s(x,T+\varepsilon)-s(x,T-\varepsilon)]
 \end{aligned}
 $$
 
