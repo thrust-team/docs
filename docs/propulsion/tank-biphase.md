@@ -41,9 +41,100 @@ Data for known properties of the oxidizer as a function of temperature are neede
 - $s_l(T)$ Specific entropy of the saturated liquid for a given temperature
 - $s_v(T)$ Specific entropy of the saturated vapor for a given temperature
 
-### Numerical solution
+### Extraction
 
-#### Time constraints
+The physical quantities are regulated by the following expressions:
+
+$$
+\begin{aligned}
+v_l(T) &= \frac1{\rho_l(T)} \\
+v_v(T) &= \frac1{\rho_l(T)} \\
+x(v, T) &= \frac{v - v_l(T)}{v_v(T) - v_l(T)} \\
+\end{aligned}
+$$
+
+The mapping of $(x,T) \to (s,v)$ is given by:
+$$
+\boxed{
+\begin{aligned}
+    s(x, T) &= (1 - x) \cdot s_l(T) + x \cdot s_v(T) \\
+    v(x, T) &= (1 - x) \cdot v_l(T) + x \cdot v_v(T) \\
+\end{aligned}
+}
+$$
+
+The goal is to find the inverse map
+$$
+    (s,v) \to (x,T)
+$$
+since evaluating $s$ and $v$ for the mass extraction is trivial.
+
+The functions $s(x,T)$ and $v(x,T)$ can be differentiated with respect to $x$ and $T$ as:
+
+$$
+\begin{aligned}
+dv = \frac{\partial v}{\partial x}\, dx + \frac{\partial v}{\partial T}\,dT \\
+ds = \frac{\partial s}{\partial x}\, dx + \frac{\partial s}{\partial T}\,dT
+\end{aligned}
+$$
+
+which in matrix form becomes
+
+$$
+\begin{Bmatrix}
+    dv \\
+    ds
+\end{Bmatrix} =
+\begin{bmatrix}
+    \dfrac{\partial v}{\partial x} &
+    \dfrac{\partial v}{\partial T}\\
+    \dfrac{\partial s}{\partial x}&
+    \dfrac{\partial s}{\partial T}
+\end{bmatrix}
+\begin{Bmatrix}
+    dx \\
+    dT
+\end{Bmatrix}
+$$
+and inverting algebraically
+$$
+\begin{Bmatrix}
+    dx \\
+    dT
+\end{Bmatrix} =
+\begin{bmatrix}
+    \dfrac{\partial v}{\partial x} &
+    \dfrac{\partial v}{\partial T}\\
+    \dfrac{\partial s}{\partial x}&
+    \dfrac{\partial s}{\partial T}
+\end{bmatrix}^{-1}
+\begin{Bmatrix}
+    dv \\
+    ds
+\end{Bmatrix}
+$$
+
+The quantities sought after are then computed as:
+$$
+\begin{Bmatrix}
+    x(s,v) \\
+    T(s,v)
+\end{Bmatrix} =
+\begin{Bmatrix}
+    x_0 \\
+    T_0
+\end{Bmatrix} +
+\int_{(s_0,T_0)} [J]^{-1}
+\begin{Bmatrix}
+    dv \\
+    ds
+\end{Bmatrix},\quad
+\text{until $x =1$}
+$$
+
+## Numerical solution
+
+### Time constraints
 
 The extraction time $t_n$ can be considered adimensional
 
@@ -57,7 +148,7 @@ where $\Delta t$ is a reasonably low number (ex. $\Delta t = 5\cdot10^{-4}$).
 
 Although the initial conditions are useful, some of them can be discarded by considering the problem adimensionalized with respect to the mass of oxidizer stored inside the tank.
 
-#### Initial conditions
+### Initial conditions
 
 $$ m_0 = 1 $$
 
@@ -68,24 +159,12 @@ $$ m_{v,0} = m_0 - m_{l,0}$$
 
 The oxidizer liquid volume is simply
 $$ V_{l,0} = \frac{m_{l,0}}{\rho_{l,0}} $$
-which can be used to get total volume
+which can be used to get the total volume
 $$ V_0 = V_{l,0} \cdot (1+f) $$
 and the vapor volume
-$$ V_{v,0} = V_0 - V_{l,0} $$
+$$ V_{v,0} = V_0 - V_{l,0}.$$
 
-The physical quantities are regulated by the following expressions:
-
-$$
-\begin{aligned}
-v_l(T) &= \frac1{\rho_l(T)} \\
-v_v(T) &= \frac1{\rho_l(T)} \\
-x(v, T) &= \frac{v - v_l(T)}{v_v(T) - v_l(T)} \\
-s(x, T) &= (1 - x) \cdot s_l(T) + x \cdot s_v(T) \\
-v(x, T) &= (1 - x) \cdot v_l(T) + x \cdot v_v(T) \\
-\end{aligned}
-$$
-
-and the following are the initial conditions of the loop
+The following are the initial conditions of the loop
 
 $$
 \begin{aligned}
@@ -99,7 +178,7 @@ S_0 &= m_0 \cdot s_0 \\
 \end{aligned}
 $$
 
-#### Mass extraction
+### Mass extraction
 
 The mass that gets extracted at every computation step from the tank is computed as
 
@@ -131,56 +210,9 @@ v_{i+1} = \frac{V_0}{m_{i+1}}
 \end{aligned}
 $$
 
-#### Vapor quality and temperature evaluation
+### Vapor Quality and Temperature Evaluation
 
 The next goal is to compute the variation of vapor quality $x$ and temperature $T$ given the variation in specific volume $v$ and specific enthalpy $s$ after th extraction.
-
-The functions $s(x,T)$ and $v(x,T)$ expressed previously can be differentiated with respect to $x$ and $T$ as:
-
-$$
-\begin{aligned}
-dv = \frac{\partial v}{\partial x}\, dx + \frac{\partial v}{\partial T}\,dT \\
-ds = \frac{\partial s}{\partial x}\, dx + \frac{\partial s}{\partial T}\,dT
-\end{aligned}
-$$
-
-which in matrix form becomes
-
-$$
-\begin{Bmatrix}
-    dv \\
-    ds
-\end{Bmatrix} =
-\begin{bmatrix}
-    \dfrac{\partial v}{\partial x} &
-    \dfrac{\partial v}{\partial T}\\
-    \dfrac{\partial s}{\partial x}&
-    \dfrac{\partial s}{\partial T}
-\end{bmatrix}
-\begin{Bmatrix}
-    dx \\
-    dT
-\end{Bmatrix}
-$$
-
-and inverting algebraically
-
-$$
-\begin{Bmatrix}
-    dx \\
-    dT
-\end{Bmatrix} =
-\begin{bmatrix}
-    \dfrac{\partial v}{\partial x} &
-    \dfrac{\partial v}{\partial T}\\
-    \dfrac{\partial s}{\partial x}&
-    \dfrac{\partial s}{\partial T}
-\end{bmatrix}^{-1}
-\begin{Bmatrix}
-    dv \\
-    ds
-\end{Bmatrix}
-$$
 
 The problem is now finding the quantities inside the Jacobian matrix. The partial derivatives with respect to vapor quality $x$ are immediate:
 
@@ -261,7 +293,7 @@ $$
 \end{Bmatrix}
 $$
 
-#### Ready for next step
+### Ready for next step
 
 Once the quantities for $T_{i+1}$ and $x_{i+1}$ are estimated, the new value for pressure $p_i$ and mass flow $\dot{m}_i$ are:
 
@@ -274,6 +306,6 @@ $$
 
 The last equation assumes that the mass flow ratio and pressure is constant along the entire extraction.
 
-### Conclusion
+### Loop Termination
 
 The extraction is over once the vapor quality $x$ reaches the value of $1$, which is when the tank contains only vapor and the system is not biphasic anymore.
