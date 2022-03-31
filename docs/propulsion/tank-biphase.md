@@ -55,12 +55,10 @@ $$
 
 The mapping of $(x,T) \to (s,v)$ is given by:
 $$
-\boxed{
 \begin{aligned}
     s(x, T) &= (1 - x) \cdot s_l(T) + x \cdot s_v(T) \\
     v(x, T) &= (1 - x) \cdot v_l(T) + x \cdot v_v(T) \\
 \end{aligned}
-}
 $$
 
 The goal is to find the inverse map
@@ -96,7 +94,9 @@ $$
     dT
 \end{Bmatrix}
 $$
+
 and inverting algebraically
+
 $$
 \begin{Bmatrix}
     dx \\
