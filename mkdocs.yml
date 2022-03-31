@@ -1,15 +1,26 @@
 site_name: THRUST Technical Docs
+
 theme:
   name: material
   features:
     - navigation.tabs
-  palette:
-    primary: black
   icon:
     logo: material/rocket-launch
   font:
     text: 'IBM Plex Sans'
     code: 'Fira Code'
+  custom_dir: docs/overrides
+  palette:
+  - scheme: default
+    primary: black
+    toggle:
+      icon: material/weather-sunny
+      name: Switch to dark mode
+  - scheme: slate
+    primary: black
+    toggle:
+      icon: material/weather-night
+      name: Switch to light mode
 
 plugins:
   - search
