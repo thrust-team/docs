@@ -8,8 +8,8 @@ theme:
   icon:
     logo: material/rocket-launch
 markdown_extensions:
-  - pymdownx.arithmatex:
-      generic: true
+#  - pymdownx.arithmatex:
+#      generic: true
 plugins:
   - git-authors:
       show_contribution: true
