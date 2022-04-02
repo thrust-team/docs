@@ -1,4 +1,4 @@
-# Knowledgebase
+# Index
 
 This website contains the knowledge acquired during the research and development of a hybrid rocket by the University of Padua students' team.
 
