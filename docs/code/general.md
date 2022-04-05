@@ -15,7 +15,7 @@ The goal of every script is ether:
 - Input/Output for information files
 - Showing the results in graphical or tabular form
 
-If you script does not do any of the above, think about what you need it for,
+If your script does not do any of the above, think about what you need it for,
 and more importantly about what others will need it for.
 
 ## Units
