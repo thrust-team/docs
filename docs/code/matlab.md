@@ -70,7 +70,7 @@ x = SOME_REQUIREMENT_VARIABLE;
 h = TARGET_ALTITUDE;
 ```
 
-This allows to easil load the interface for a script already written without
+This allows to easily load the interface for a script already written without
 the requirements interface in mind, and without having to rename the variables
 inside the formulas.
 
