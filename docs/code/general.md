@@ -1,7 +1,6 @@
 # General Coding Practices
 
->THE PURPOSE OF COMPUTING IS INSIGHT,
->
+>THE PURPOSE OF COMPUTING IS INSIGHT,  
 >NOT NUMBERS
 >
 >Richard Hamming, *The Art Of Computing* 1987, Ch. N+1
